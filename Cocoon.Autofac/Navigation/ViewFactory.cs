@@ -22,8 +22,6 @@ namespace Cocoon.Navigation
             var page = context.ResolveNamed<object>(viewName);
             var viewModel = context.ResolveNamed<object>(viewModelName);
 
-            // If no suitable page is found then throw an exception
-
             if (page == null)
                 throw new InvalidOperationException(string.Format(ResourceHelper.GetErrorResource("Exception_InvalidOperation_CannotNavigateAsPageIsNotFound"), name));
 
@@ -32,17 +30,14 @@ namespace Cocoon.Navigation
                 AttachViewModel(page, viewModel);
             }
 
-            // Return a new IViewLifetimeContext
-
             return new ViewLifetimeContext(page, viewModel);
         }
 
-        // *** Protected Methods ***
-
         protected virtual void AttachViewModel(object page, object viewModel)
         {
-            if (page is FrameworkElement)
-                ((FrameworkElement)page).DataContext = viewModel;
+            var frameworkElement = page as FrameworkElement;
+            if (frameworkElement != null)
+                frameworkElement.DataContext = viewModel;
         }
     }
 
