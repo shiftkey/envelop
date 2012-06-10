@@ -13,8 +13,7 @@
     <copyright>Copyright 2012</copyright>
     <tags>cocoon MVVM WinRT</tags>
     <dependencies>
-      <dependency id="Cocoon" version="1.0.0-alpha" />
-      <dependency id="Microsoft.Composition" version="1.0.10-rc" />
+      
     </dependencies>
   </metadata>
 </package>

@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Cocoon.Data")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A collection of data helpers to make working with data easier")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Andrew Wilkinson")]
 [assembly: AssemblyProduct("Cocoon.Data")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
