@@ -2,7 +2,7 @@
 
 namespace Cocoon.Helpers
 {
-    public static class ResourceHelper
+    internal static class ResourceHelper
     {
         // *** Static Fields ***
 

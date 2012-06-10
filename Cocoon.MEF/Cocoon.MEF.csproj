@@ -106,6 +106,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\cocoon\helpers\ResourceHelper.cs">
+      <Link>Helpers\ResourceHelper.cs</Link>
+    </Compile>
     <Compile Include="CocoonBootstrapper.cs" />
     <Compile Include="Navigation\NavigationManager.cs" />
     <Compile Include="Navigation\PageExportAttribute.cs" />
@@ -117,6 +120,10 @@
     <Compile Include="Services\StorageManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cocoon.Data\Cocoon.Data.csproj">
+      <Project>{bb2fba2b-048c-463d-9d8f-b3d90ce1a5e6}</Project>
+      <Name>Cocoon.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cocoon\Cocoon.csproj">
       <Project>{9bd8fd5b-9293-4f64-a88f-54af5fc8488b}</Project>
       <Name>Cocoon</Name>
