@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Cocoon.Helpers;
 
 namespace Cocoon.Data

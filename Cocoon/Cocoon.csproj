@@ -112,18 +112,6 @@
     <PRIResource Include="strings\en-US\Errors.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataListSource_Skip.cs" />
-    <Compile Include="Data\DataListPageResult.cs" />
-    <Compile Include="Data\DataListSource.cs" />
-    <Compile Include="Data\DataListSourceBase.cs" />
-    <Compile Include="Data\DataListSource_Take.cs" />
-    <Compile Include="Data\IDataListSource.cs" />
-    <Compile Include="Data\ObservableVector.cs" />
-    <Compile Include="Data\PagedDataListSource.cs" />
-    <Compile Include="Data\SimpleDataListSource.cs" />
-    <Compile Include="Data\VirtualizingDataList.cs" />
-    <Compile Include="Data\VirtualizingList.cs" />
-    <Compile Include="Data\VirtualizingVector.cs" />
     <Compile Include="Helpers\ReflectionHelper.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Helpers\SerializationHelper.cs" />

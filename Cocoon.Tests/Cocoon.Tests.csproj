@@ -161,6 +161,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cocoon.Data\Cocoon.Data.csproj">
+      <Project>{bb2fba2b-048c-463d-9d8f-b3d90ce1a5e6}</Project>
+      <Name>Cocoon.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cocoon.MEF\Cocoon.MEF.csproj">
       <Project>{c1d41e3f-bcfc-4c91-9b27-f29f8e7150ed}</Project>
       <Name>Cocoon.MEF</Name>
