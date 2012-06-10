@@ -14,12 +14,12 @@ namespace Cocoon.Services
             this.navigationManager = navigationManager;
         }
         
-        public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
+        public Task<bool> Activate(IActivatedEventArgs activatedEventArgs, string page)
         {
             switch (activatedEventArgs.Kind)
             {
                 case ActivationKind.Launch:
-                    return ActivateLaunch((ILaunchActivatedEventArgs)activatedEventArgs);
+                    return ActivateLaunch(activatedEventArgs, page);
                 default:
                     return Task.FromResult(false);
             }
@@ -27,13 +27,13 @@ namespace Cocoon.Services
 
         // *** Private Methods ***
 
-        private async Task<bool> ActivateLaunch(ILaunchActivatedEventArgs e)
+        private async Task<bool> ActivateLaunch(IActivatedEventArgs e, string page)
         {
             // Unless the application was closed (ClosedByUser) or previously crashed (NotRunning) then attempt to restore the navigation stack
 
             if (e.PreviousExecutionState != ApplicationExecutionState.ClosedByUser && e.PreviousExecutionState != ApplicationExecutionState.NotRunning)
             {
-                bool success = await navigationManager.RestoreNavigationStack();
+                var success = await navigationManager.RestoreNavigationStack();
 
                 if (success)
                 {
@@ -46,7 +46,7 @@ namespace Cocoon.Services
 
             // If we cannot restore the navigation stack for any reason, navigate to the home page
 
-            navigationManager.NavigateTo(navigationManager.HomePageName);
+            navigationManager.NavigateTo(page);
 
             if (Window.Current != null)
                 Window.Current.Activate();

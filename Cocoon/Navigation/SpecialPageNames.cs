@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cocoon.Navigation
 {
+    [Obsolete("I don't like this")]
     public static class SpecialPageNames
     {
         public const string HomePage = "Cocoon.Navigation.SpecialPageType.HomePage";

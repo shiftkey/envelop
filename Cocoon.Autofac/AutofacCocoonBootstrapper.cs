@@ -27,6 +27,9 @@ namespace Cocoon
             builder.RegisterType<WindowNavigationTarget>()
                    .AsImplementedInterfaces()
                    .SingleInstance();
+            builder.RegisterType<ViewFactory>().AsImplementedInterfaces();
+            builder.RegisterType<LifetimeManager>().AsImplementedInterfaces();
+            builder.RegisterType<StorageManager>().AsImplementedInterfaces();
 
             RegisterDependencies(builder);
 
@@ -65,7 +68,14 @@ namespace Cocoon
                 isActivated = true;
             }
 
-            ActivationManager.Activate(args);
+            var page = SelectHomePage();
+
+            ActivationManager.Activate(args, page);
+        }
+
+        public virtual string SelectHomePage()
+        {
+            return SpecialPageNames.HomePage;
         }
     }
 }

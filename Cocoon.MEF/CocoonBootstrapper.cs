@@ -81,7 +81,7 @@ namespace Cocoon
 
             // Call the activation manager
 
-            ActivationManager.Activate(args);
+            ActivationManager.Activate(args, SpecialPageNames.HomePage);
         }
     }
 }

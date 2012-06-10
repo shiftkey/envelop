@@ -143,7 +143,7 @@ namespace Cocoon.Tests
 
             // *** Methods ***
 
-            public Task<bool> Activate(IActivatedEventArgs activatedEventArgs)
+            public Task<bool> Activate(IActivatedEventArgs activatedEventArgs, string page)
             {
                 ActivationEventArgs.Add(activatedEventArgs);
                 return Task.FromResult<bool>(true);

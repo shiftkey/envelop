@@ -21,7 +21,7 @@ namespace Cocoon.Tests.Services
             IActivationManager activationManager = CreateActivationManager();
 
             IActivatedEventArgs activatedEventArgs = new MockActivatedEventArgs() { Kind = ActivationKind.CameraSettings };
-            bool success = await activationManager.Activate(activatedEventArgs);
+            bool success = await activationManager.Activate(activatedEventArgs, SpecialPageNames.HomePage);
 
             Assert.AreEqual(false, success);
         }
@@ -34,7 +34,7 @@ namespace Cocoon.Tests.Services
 
             // Activate the application
 
-            await activationManager.Activate(new MockLaunchActivatedEventArgs());
+            await activationManager.Activate(new MockLaunchActivatedEventArgs(), SpecialPageNames.HomePage);
 
             // Assert that the home page was navigated to
 
@@ -50,7 +50,7 @@ namespace Cocoon.Tests.Services
 
             // Activate the application
 
-            await activationManager.Activate(new MockLaunchActivatedEventArgs());
+            await activationManager.Activate(new MockLaunchActivatedEventArgs(), "MockHomePage");
 
             // Assert that the home page was navigated to
 
@@ -66,7 +66,7 @@ namespace Cocoon.Tests.Services
 
             // Activate the application
 
-            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.ClosedByUser });
+            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.ClosedByUser }, SpecialPageNames.HomePage);
 
             // Assert that the home page was navigated to
 
@@ -81,7 +81,7 @@ namespace Cocoon.Tests.Services
 
             // Activate the application
 
-            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.NotRunning });
+            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.NotRunning }, SpecialPageNames.HomePage);
 
             // Assert that the home page was navigated to
 

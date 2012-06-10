@@ -13,5 +13,10 @@ namespace Cocoon.Autofac.Sample
             builder.RegisterType<InterestingPhotosViewModel>().Named<object>("InterestingPhotosViewModel");
             builder.RegisterType<FlickrDataSource>().AsSelf();
         }
+
+        public override string SelectHomePage()
+        {
+            return "InterestingPhotos";
+        }
     }
 }
