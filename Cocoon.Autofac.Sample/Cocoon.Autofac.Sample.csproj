@@ -130,11 +130,12 @@
     <Compile Include="Data\FlickrPhoto.cs" />
     <Compile Include="Data\FlickrPhotoPage.cs" />
     <Compile Include="Data\InterestingPhotosDataListSource.cs" />
-    <Compile Include="Pages\InterestingPhotosPage.xaml.cs">
+    <Compile Include="Data\IUserContext.cs" />
+    <Compile Include="Modules\Home\InterestingPhotosPage.xaml.cs">
       <DependentUpon>InterestingPhotosPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\InterestingPhotosViewModel.cs" />
+    <Compile Include="Modules\Home\InterestingPhotosViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -151,7 +152,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\InterestingPhotosPage.xaml">
+    <Page Include="Modules\Home\InterestingPhotosPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

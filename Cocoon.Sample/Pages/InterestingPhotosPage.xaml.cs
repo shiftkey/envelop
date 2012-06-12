@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Cocoon.Sample.Pages
 {
-    [PageExport(SpecialPageNames.HomePage)]
+    [PageExport(SpecialPageNames.Home)]
     public sealed partial class InterestingPhotosPage : Cocoon.Sample.Common.LayoutAwarePage
     {
         public InterestingPhotosPage()

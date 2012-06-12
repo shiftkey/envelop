@@ -21,7 +21,7 @@ namespace Cocoon.Tests.Services
             IActivationManager activationManager = CreateActivationManager();
 
             IActivatedEventArgs activatedEventArgs = new MockActivatedEventArgs() { Kind = ActivationKind.CameraSettings };
-            bool success = await activationManager.Activate(activatedEventArgs, SpecialPageNames.HomePage);
+            bool success = await activationManager.Activate(activatedEventArgs, SpecialPageNames.Home);
 
             Assert.AreEqual(false, success);
         }
@@ -34,7 +34,7 @@ namespace Cocoon.Tests.Services
 
             // Activate the application
 
-            await activationManager.Activate(new MockLaunchActivatedEventArgs(), SpecialPageNames.HomePage);
+            await activationManager.Activate(new MockLaunchActivatedEventArgs(), SpecialPageNames.Home);
 
             // Assert that the home page was navigated to
 
@@ -66,7 +66,7 @@ namespace Cocoon.Tests.Services
 
             // Activate the application
 
-            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.ClosedByUser }, SpecialPageNames.HomePage);
+            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.ClosedByUser }, SpecialPageNames.Home);
 
             // Assert that the home page was navigated to
 
@@ -81,7 +81,7 @@ namespace Cocoon.Tests.Services
 
             // Activate the application
 
-            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.NotRunning }, SpecialPageNames.HomePage);
+            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.NotRunning }, SpecialPageNames.Home);
 
             // Assert that the home page was navigated to
 

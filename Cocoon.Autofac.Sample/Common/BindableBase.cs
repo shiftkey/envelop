@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Windows.UI.Xaml.Data;
 
-namespace Cocoon.Sample.Common
+namespace Cocoon.Autofac.Sample.Common
 {
     /// <summary>
     /// Implementation of <see cref="INotifyPropertyChanged"/> to simplify models.

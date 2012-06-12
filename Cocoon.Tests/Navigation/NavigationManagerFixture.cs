@@ -72,7 +72,7 @@ namespace Cocoon.Tests.Navigation
         {
             INavigationManager navigationManager = CreateNavigationManager(setHomePageName: false);
 
-            Assert.AreEqual(SpecialPageNames.HomePage, navigationManager.HomePageName);
+            Assert.AreEqual(SpecialPageNames.Home, navigationManager.HomePageName);
         }
 
         [TestMethod]

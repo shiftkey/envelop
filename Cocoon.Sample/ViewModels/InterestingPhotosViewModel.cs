@@ -15,7 +15,7 @@ using System.Composition;
 
 namespace Cocoon.Sample.ViewModels
 {
-    [ViewModelExport(SpecialPageNames.HomePage)]
+    [ViewModelExport(SpecialPageNames.Home)]
     public class InterestingPhotosViewModel : INotifyPropertyChanged
     {
         // *** Fields ***

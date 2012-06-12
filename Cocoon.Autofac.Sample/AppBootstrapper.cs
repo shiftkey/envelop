@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using Cocoon.Autofac.Sample.Data;
-using Cocoon.Autofac.Sample.Pages;
-using Cocoon.Autofac.Sample.ViewModels;
+using Cocoon.Autofac.Sample.Modules.Home;
 
 namespace Cocoon.Autofac.Sample
 {
@@ -9,14 +8,20 @@ namespace Cocoon.Autofac.Sample
     {
         protected override void RegisterDependencies(ContainerBuilder builder)
         {
-            builder.RegisterType<InterestingPhotosPage>().Named<object>("InterestingPhotosView");
-            builder.RegisterType<InterestingPhotosViewModel>().Named<object>("InterestingPhotosViewModel");
-            builder.RegisterType<FlickrDataSource>().AsSelf();
+            builder.RegisterType<UserContext>()
+                   .AsImplementedInterfaces();
+            builder.RegisterType<InterestingPhotosPage>()
+                   .Named<object>("InterestingPhotosView");
+            builder.RegisterType<InterestingPhotosViewModel>()
+                   .Named<object>("InterestingPhotosViewModel");
+            builder.RegisterType<FlickrDataSource>()
+                   .AsSelf();
         }
 
         public override string SelectHomePage()
         {
-            return "InterestingPhotos";
+            var context = Container.Resolve<IUserContext>();
+            return context.GetHomePage();
         }
     }
 }

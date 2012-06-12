@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Cocoon.Autofac.Sample.Data;
 using Windows.UI.Xaml;
 
-namespace Cocoon.Autofac.Sample.ViewModels
+namespace Cocoon.Autofac.Sample.Modules.Home
 {
     public class InterestingPhotosViewModel : INotifyPropertyChanged
     {

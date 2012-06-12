@@ -10,9 +10,9 @@ namespace Cocoon
     {
         bool isActivated;
 
-        public IActivationManager ActivationManager { get; set; }
+        private IActivationManager ActivationManager { get; set; }
 
-        public INavigationManager NavigationManager { get; set; }
+        protected IContainer Container { get; private set; }
 
         public virtual void Initialize()
         {
@@ -22,14 +22,24 @@ namespace Cocoon
         protected virtual IContainer Configure()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<NavigationManager>().AsImplementedInterfaces();
-            builder.RegisterType<ActivationManager>().AsImplementedInterfaces();
+            builder.RegisterType<NavigationManager>()
+                   .AsImplementedInterfaces()
+                   .SingleInstance();
+            builder.RegisterType<ActivationManager>()
+                   .AsImplementedInterfaces()
+                   .SingleInstance();
             builder.RegisterType<WindowNavigationTarget>()
                    .AsImplementedInterfaces()
                    .SingleInstance();
-            builder.RegisterType<ViewFactory>().AsImplementedInterfaces();
-            builder.RegisterType<LifetimeManager>().AsImplementedInterfaces();
-            builder.RegisterType<StorageManager>().AsImplementedInterfaces();
+            builder.RegisterType<ViewFactory>()
+                   .AsImplementedInterfaces()
+                   .SingleInstance();
+            builder.RegisterType<LifetimeManager>()
+                   .AsImplementedInterfaces()
+                   .SingleInstance();
+            builder.RegisterType<StorageManager>()
+                   .AsImplementedInterfaces()
+                   .SingleInstance();
 
             RegisterDependencies(builder);
 
@@ -40,9 +50,8 @@ namespace Cocoon
 
         protected void Initialize(bool registerForActivation)
         {
-            var container = Configure();
-            ActivationManager = container.Resolve<IActivationManager>();
-            NavigationManager = container.Resolve<INavigationManager>();
+            Container = Configure();
+            ActivationManager = Container.Resolve<IActivationManager>();
 
             if (!registerForActivation) 
                 return;
@@ -75,7 +84,7 @@ namespace Cocoon
 
         public virtual string SelectHomePage()
         {
-            return SpecialPageNames.HomePage;
+            return SpecialPageNames.Home;
         }
     }
 }

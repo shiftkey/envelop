@@ -28,7 +28,7 @@ namespace Cocoon.Navigation
 
         private readonly Stack<NavigationEntry> navigationStack = new Stack<NavigationEntry>();
 
-        private string homePageName = SpecialPageNames.HomePage;
+        private string homePageName = SpecialPageNames.Home;
         private NavigationStorageType navigationStorageType = NavigationStorageType.None;
 
         // *** Constructors ***
