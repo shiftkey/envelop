@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Text;
-using System.Linq;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Cocoon.Navigation;
-using Windows.UI.Xaml;
-using System.Composition;
-using Cocoon.Services;
-using Windows.ApplicationModel;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.ApplicationModel.Activation;
-using Cocoon.Tests.Helpers;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
+using Cocoon.Navigation;
+using Cocoon.Services;
+using Cocoon.Tests.Helpers;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Windows.Storage;
 using Windows.UI.Xaml.Navigation;
 
 namespace Cocoon.Tests.Navigation

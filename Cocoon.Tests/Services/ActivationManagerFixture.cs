@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Cocoon.Navigation;
 using Cocoon.Services;
@@ -46,6 +44,7 @@ namespace Cocoon.Tests.Services
         public async Task Activate_Launch_NavigatesToHomePageIfNoPreviousNavigationStack()
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = false };
+            navigationManager.HomePageName = "MockHomePage";
             IActivationManager activationManager = CreateActivationManager(navigationManager);
 
             // Activate the application
@@ -63,10 +62,11 @@ namespace Cocoon.Tests.Services
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
             IActivationManager activationManager = CreateActivationManager(navigationManager);
+            var homePage = "MockHomePage";
 
             // Activate the application
 
-            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.ClosedByUser }, SpecialPageNames.Home);
+            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.ClosedByUser }, homePage);
 
             // Assert that the home page was navigated to
 
@@ -78,14 +78,15 @@ namespace Cocoon.Tests.Services
         {
             MockNavigationManager navigationManager = new MockNavigationManager() { CanRestoreNavigationStack = true };
             IActivationManager activationManager = CreateActivationManager(navigationManager);
+            var homePage = "MockHomePage";
 
             // Activate the application
 
-            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.NotRunning }, SpecialPageNames.Home);
+            await activationManager.Activate(new MockLaunchActivatedEventArgs() { PreviousExecutionState = ApplicationExecutionState.NotRunning }, homePage);
 
             // Assert that the home page was navigated to
 
-            CollectionAssert.AreEqual(new string[] { "MockHomePage" }, navigationManager.NavigationList);
+            CollectionAssert.AreEqual(new string[] { homePage }, navigationManager.NavigationList);
         }
 
         // *** Private Methods ***
@@ -117,17 +118,7 @@ namespace Cocoon.Tests.Services
                 get { throw new NotImplementedException(); }
             }
 
-            public string HomePageName
-            {
-                get
-                {
-                    return "MockHomePage";
-                }
-                set
-                {
-                    throw new NotImplementedException();
-                }
-            }
+            public string HomePageName { get; set; }
 
             public NavigationStorageType NavigationStorageType
             {

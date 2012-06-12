@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Text;
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Cocoon.Navigation;
-using Windows.ApplicationModel.Activation;
-using System.Threading.Tasks;
-using System.Composition.Hosting;
-using System.Composition;
 using System.Collections;
-using Windows.ApplicationModel.Core;
+using System.Collections.Generic;
+using System.Composition;
+using System.Composition.Hosting;
+using System.Linq;
+using System.Threading.Tasks;
+using Cocoon.Navigation;
 using Cocoon.Services;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 
 namespace Cocoon.Tests
 {

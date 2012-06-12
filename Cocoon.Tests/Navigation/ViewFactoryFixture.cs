@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.Linq;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Cocoon.Navigation;
 using System.Composition;
+using Cocoon.Navigation;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace Cocoon.Tests.Navigation
 {
