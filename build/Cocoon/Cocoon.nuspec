@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Cocoon</id>
+    <version>{version}</version>
+    <title>Cocoon</title>
+    <authors>Andrew Wilkinson</authors>
+    <owners>Andrew Wilkinson</owners>
+    <projectUrl>http://http://cocoon.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A framework to support the development of .Net Windows 8 Metro-style applications</description>
+    <releaseNotes>Initial Release</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>cocoon MVVM WinRT</tags>
+  </metadata>
+</package>

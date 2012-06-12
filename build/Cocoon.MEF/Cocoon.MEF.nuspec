@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Cocoon.MEF</id>
+    <version>{version}</version>
+    <title>MEF adapters for Cocoon</title>
+    <authors>Andrew Wilkinson</authors>
+    <owners>Andrew Wilkinson</owners>
+    <projectUrl>http://cocoon.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Integrate MEF into your application</description>
+    <releaseNotes>Initial Release</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>cocoon MVVM WinRT</tags>
+    <dependencies>
+      <dependency id="Cocoon" version="{version}" />
+      <dependency id="Microsoft.Composition" version="1.0.10-rc" />
+    </dependencies>
+  </metadata>
+</package>

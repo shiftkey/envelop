@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Cocoon.Data</id>
+    <version>{version}</version>
+    <title>Cocoon.Data</title>
+    <authors>Andrew Wilkinson</authors>
+    <owners>Andrew Wilkinson</owners>
+    <projectUrl>http://cocoon.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A collection of data helpers to help speed up application development</description>
+    <releaseNotes>Initial Release</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>cocoon MVVM WinRT</tags>
+    <dependencies>
+      
+    </dependencies>
+  </metadata>
+</package>
