@@ -103,12 +103,8 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\Cocoon.Data\Cocoon.Data.csproj">
-      <Project>{bb2fba2b-048c-463d-9d8f-b3d90ce1a5e6}</Project>
-      <Name>Cocoon.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cocoon.MEF\Cocoon.MEF.csproj">
-      <Project>{c1d41e3f-bcfc-4c91-9b27-f29f8e7150ed}</Project>
+      <Project>{26aa7e85-1cb7-4483-8b12-5f996e76a643}</Project>
       <Name>Cocoon.MEF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Cocoon\Cocoon.csproj">
@@ -171,19 +167,24 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Composition.AttributedModel">
+    <Reference Include="System.Composition.AttributedModel, Version=1.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Composition.1.0.10-rc\lib\netcore45\System.Composition.AttributedModel.dll</HintPath>
     </Reference>
-    <Reference Include="System.Composition.Convention">
+    <Reference Include="System.Composition.Convention, Version=1.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Composition.1.0.10-rc\lib\netcore45\System.Composition.Convention.dll</HintPath>
     </Reference>
-    <Reference Include="System.Composition.Hosting">
+    <Reference Include="System.Composition.Hosting, Version=1.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Composition.1.0.10-rc\lib\netcore45\System.Composition.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Composition.Runtime">
+    <Reference Include="System.Composition.Runtime, Version=1.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Composition.1.0.10-rc\lib\netcore45\System.Composition.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="System.Composition.TypedParts">
+    <Reference Include="System.Composition.TypedParts, Version=1.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Composition.1.0.10-rc\lib\netcore45\System.Composition.TypedParts.dll</HintPath>
     </Reference>
   </ItemGroup>

@@ -2,8 +2,8 @@
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
-using Cocoon.Data;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Cocoon.Data;
 using System.Threading.Tasks;
 
 namespace Cocoon.Tests.Data

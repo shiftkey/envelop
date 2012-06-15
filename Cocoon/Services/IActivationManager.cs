@@ -5,6 +5,6 @@ namespace Cocoon.Services
 {
     public interface IActivationManager
     {
-        Task<bool> Activate(IActivatedEventArgs activatedEventArgs, string page);
+        Task<bool> Activate(IActivatedEventArgs activatedEventArgs);
     }
 }

@@ -77,14 +77,7 @@ namespace Cocoon
                 isActivated = true;
             }
 
-            var page = SelectHomePage();
-
-            ActivationManager.Activate(args, page);
-        }
-
-        public virtual string SelectHomePage()
-        {
-            return SpecialPageNames.Home;
+            ActivationManager.Activate(args);
         }
     }
 }

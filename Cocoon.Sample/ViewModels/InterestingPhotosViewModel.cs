@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cocoon.Data;
 using Cocoon.Sample.Data;
 using Windows.UI.Xaml;
 using Windows.Foundation.Collections;
@@ -15,7 +16,7 @@ using System.Composition;
 
 namespace Cocoon.Sample.ViewModels
 {
-    [ViewModelExport(SpecialPageNames.Home)]
+    [ViewModelExport(SpecialPageNames.HomePage)]
     public class InterestingPhotosViewModel : INotifyPropertyChanged
     {
         // *** Fields ***

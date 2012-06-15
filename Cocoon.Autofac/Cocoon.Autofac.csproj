@@ -102,10 +102,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\Cocoon.Data\Cocoon.Data.csproj">
-      <Project>{bb2fba2b-048c-463d-9d8f-b3d90ce1a5e6}</Project>
-      <Name>Cocoon.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cocoon\Cocoon.csproj">
       <Project>{9BD8FD5B-9293-4F64-A88F-54AF5FC8488B}</Project>
       <Name>Cocoon</Name>
@@ -116,7 +112,6 @@
       <Link>Helpers\ResourceHelper.cs</Link>
     </Compile>
     <Compile Include="AutofacCocoonBootstrapper.cs" />
-    <Compile Include="Navigation\NavigationManager.cs" />
     <Compile Include="Navigation\ViewFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ActivationManager.cs" />
@@ -128,9 +123,6 @@
     <Reference Include="Autofac">
       <HintPath>..\libs\Autofac.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Cocoon.Autofac.nuspec" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

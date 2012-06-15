@@ -6,10 +6,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C1D41E3F-BCFC-4C91-9B27-F29F8E7150ED}</ProjectGuid>
+    <ProjectGuid>{26AA7E85-1CB7-4483-8B12-5F996E76A643}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cocoon</RootNamespace>
+    <RootNamespace>Cocoon.MEF</RootNamespace>
     <AssemblyName>Cocoon.MEF</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
@@ -102,34 +102,20 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="Cocoon.MEF.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\cocoon\helpers\ResourceHelper.cs">
-      <Link>Helpers\ResourceHelper.cs</Link>
-    </Compile>
-    <Compile Include="CocoonBootstrapper.cs" />
-    <Compile Include="Navigation\NavigationManager.cs" />
-    <Compile Include="Navigation\PageExportAttribute.cs" />
-    <Compile Include="Navigation\ViewFactory.cs" />
-    <Compile Include="Navigation\ViewModelExportAttribute.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ActivationManager.cs" />
-    <Compile Include="Services\LifetimeManager.cs" />
-    <Compile Include="Services\StorageManager.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cocoon.Data\Cocoon.Data.csproj">
-      <Project>{bb2fba2b-048c-463d-9d8f-b3d90ce1a5e6}</Project>
-      <Name>Cocoon.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Cocoon\Cocoon.csproj">
       <Project>{9bd8fd5b-9293-4f64-a88f-54af5fc8488b}</Project>
       <Name>Cocoon</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CocoonBootstrapper.cs" />
+    <Compile Include="Helpers\ResourceHelper.cs" />
+    <Compile Include="Navigation\PageExportAttribute.cs" />
+    <Compile Include="Navigation\PageMetadata.cs" />
+    <Compile Include="Navigation\ViewFactory.cs" />
+    <Compile Include="Navigation\ViewModelExportAttribute.cs" />
+    <Compile Include="Navigation\ViewModelMetadata.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Composition.AttributedModel">
@@ -147,6 +133,13 @@
     <Reference Include="System.Composition.TypedParts">
       <HintPath>..\packages\Microsoft.Composition.1.0.10-rc\lib\netcore45\System.Composition.TypedParts.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Cocoon.MEF.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <PRIResource Include="strings\en-US\Errors.resw" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

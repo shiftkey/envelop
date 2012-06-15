@@ -18,10 +18,10 @@ namespace Cocoon.Autofac.Sample
                    .AsSelf();
         }
 
-        public override string SelectHomePage()
-        {
-            var context = Container.Resolve<IUserContext>();
-            return context.GetHomePage();
-        }
+        //public override string SelectHomePage()
+        //{
+        //    var context = Container.Resolve<IUserContext>();
+        //    return context.GetHomePage();
+        //}
     }
 }

@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
 
 namespace Cocoon.Navigation
 {
     public interface INavigationManager
     {
+        // *** Properties ***
+
         bool CanGoBack { get; }
-        [Obsolete("Doesn't seem to be an easy way to programatically set this")]
         string HomePageName { get; set; }
         NavigationStorageType NavigationStorageType { get; set; }
+
+        // *** Methods ***
 
         void GoBack();
         void NavigateTo(string pageName);

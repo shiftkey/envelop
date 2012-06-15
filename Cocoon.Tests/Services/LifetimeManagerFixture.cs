@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Text;
 using System.Linq;
-using System.Threading.Tasks;
-using Cocoon.Services;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Cocoon.Services;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using System.Collections;
 
 namespace Cocoon.Tests.Services
 {

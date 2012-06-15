@@ -112,6 +112,18 @@
     <PRIResource Include="strings\en-US\Errors.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DataListSource_Skip.cs" />
+    <Compile Include="Data\DataListPageResult.cs" />
+    <Compile Include="Data\DataListSource.cs" />
+    <Compile Include="Data\DataListSourceBase.cs" />
+    <Compile Include="Data\DataListSource_Take.cs" />
+    <Compile Include="Data\IDataListSource.cs" />
+    <Compile Include="Data\ObservableVector.cs" />
+    <Compile Include="Data\PagedDataListSource.cs" />
+    <Compile Include="Data\SimpleDataListSource.cs" />
+    <Compile Include="Data\VirtualizingDataList.cs" />
+    <Compile Include="Data\VirtualizingList.cs" />
+    <Compile Include="Data\VirtualizingVector.cs" />
     <Compile Include="Helpers\ReflectionHelper.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="Helpers\SerializationHelper.cs" />
@@ -119,19 +131,21 @@
     <Compile Include="Navigation\INavigationAware.cs" />
     <Compile Include="Navigation\INavigationManager.cs" />
     <Compile Include="Navigation\INavigationTarget.cs" />
-    <Compile Include="Navigation\PageMetadata.cs" />
     <Compile Include="Navigation\IViewFactory.cs" />
     <Compile Include="Navigation\IViewLifetimeContext.cs" />
-    <Compile Include="Navigation\ViewModelMetadata.cs" />
     <Compile Include="Navigation\NavigationEntry.cs" />
+    <Compile Include="Navigation\NavigationManager.cs" />
     <Compile Include="Navigation\NavigationStorageType.cs" />
     <Compile Include="Navigation\SpecialPageNames.cs" />
     <Compile Include="Navigation\WindowNavigationTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ActivationManager.cs" />
     <Compile Include="Services\IActivationManager.cs" />
     <Compile Include="Services\ILifetimeAware.cs" />
     <Compile Include="Services\ILifetimeManager.cs" />
     <Compile Include="Services\IStorageManager.cs" />
+    <Compile Include="Services\LifetimeManager.cs" />
+    <Compile Include="Services\StorageManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Cocoon.nuspec" />

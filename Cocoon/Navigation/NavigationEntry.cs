@@ -8,7 +8,7 @@ using Cocoon.Helpers;
 
 namespace Cocoon.Navigation
 {
-    public class NavigationEntry
+    internal class NavigationEntry
     {
         // *** Fields ***
 

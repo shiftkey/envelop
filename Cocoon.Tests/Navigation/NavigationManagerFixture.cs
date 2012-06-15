@@ -1,13 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Text;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Threading.Tasks;
-using Cocoon.Navigation;
-using Cocoon.Services;
-using Cocoon.Tests.Helpers;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Cocoon.Navigation;
+using Windows.UI.Xaml;
+using Cocoon.Services;
+using Windows.ApplicationModel;
+using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.ApplicationModel.Activation;
+using Cocoon.Tests.Helpers;
+using System.Runtime.Serialization;
 using Windows.UI.Xaml.Navigation;
 
 namespace Cocoon.Tests.Navigation
@@ -67,7 +71,7 @@ namespace Cocoon.Tests.Navigation
         {
             INavigationManager navigationManager = CreateNavigationManager(setHomePageName: false);
 
-            Assert.AreEqual(SpecialPageNames.Home, navigationManager.HomePageName);
+            Assert.AreEqual(SpecialPageNames.HomePage, navigationManager.HomePageName);
         }
 
         [TestMethod]

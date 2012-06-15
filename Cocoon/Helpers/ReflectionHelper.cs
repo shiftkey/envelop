@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Cocoon.Helpers
 {
-    public static class ReflectionHelper
+    internal static class ReflectionHelper
     {
         // *** Methods ***
 
