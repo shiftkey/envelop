@@ -114,6 +114,9 @@
   <ItemGroup>
     <!--A reference to the entire .Net Framework and Windows SDK are automatically included-->
     <SDKReference Include="MSTestFramework, Version=11.0" />
+    <SDKReference Include="NSubstitute, Version=1.0">
+      <Name>NSubstitute Mocking Framework</Name>
+    </SDKReference>
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +137,7 @@
     <Compile Include="Services\ActivationManagerFixture.cs" />
     <Compile Include="Services\LifetimeManagerFixture.cs" />
     <Compile Include="Services\StorageManagerFixture.cs" />
+    <Compile Include="SomeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

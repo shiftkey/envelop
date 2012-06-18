@@ -9,13 +9,9 @@ namespace Cocoon.Navigation
 {
     public interface INavigationManager
     {
-        // *** Properties ***
-
         bool CanGoBack { get; }
         string HomePageName { get; set; }
         NavigationStorageType NavigationStorageType { get; set; }
-
-        // *** Methods ***
 
         void GoBack();
         void NavigateTo(string pageName);
