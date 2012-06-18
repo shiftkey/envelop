@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Text;
-using System.Linq;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Cocoon.Services;
+using System.Linq;
 using System.Threading.Tasks;
+using Cocoon.Services;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using NSubstitute;
 using Windows.ApplicationModel;
-using System.Collections;
 
 namespace Cocoon.Tests.Services
 {
     [TestClass]
     public class LifetimeManagerFixture
     {
-        // *** Method Tests ***
-
         [TestMethod]
         public void Register_ThrowsException_IfServiceIsNull()
         {
@@ -26,7 +23,8 @@ namespace Cocoon.Tests.Services
         [TestMethod]
         public void Register_ThrowsException_WithMultipleRegistrationOfSameService()
         {
-            MockService service = new MockService();
+            var service = Substitute.For<ILifetimeAware>();
+
             LifetimeManager lifetimeManager = new LifetimeManager();
 
             lifetimeManager.Register(service);
@@ -45,8 +43,8 @@ namespace Cocoon.Tests.Services
         [TestMethod]
         public void Unregister_ThrowsException_IfServiceIsNotRegistered()
         {
-            MockService service1 = new MockService();
-            MockService service2 = new MockService();
+            var service1 = Substitute.For<ILifetimeAware>();
+            var service2 = Substitute.For<ILifetimeAware>();
             LifetimeManager lifetimeManager = new LifetimeManager();
 
             lifetimeManager.Register(service1);
@@ -54,104 +52,99 @@ namespace Cocoon.Tests.Services
             Assert.ThrowsException<InvalidOperationException>(() => lifetimeManager.Unregister(service2));
         }
 
-        // *** Behavior Tests ***
-
         [TestMethod]
         public void RegistedServices_ReceiveSuspendingEvent()
         {
-            MockService service1 = new MockService();
-            MockService service2 = new MockService();
+            var service1 = Substitute.For<ILifetimeAware>();
+            service1.OnSuspending().Returns(Task.FromResult(true));
+            var service2 = Substitute.For<ILifetimeAware>();
+            service2.OnSuspending().Returns(Task.FromResult(true));
 
             TestableLifetimeManager lifetimeManager = CreateLifetimeManager(new[] { service1, service2 });
 
             lifetimeManager.Suspend(new MockSuspendingEventArgs());
 
-            CollectionAssert.AreEqual(new string[] { "OnSuspending" }, service1.LifetimeEventCalls);
-            CollectionAssert.AreEqual(new string[] { "OnSuspending" }, service2.LifetimeEventCalls);
+            service1.Received().OnSuspending();
+            service2.Received().OnSuspending();
         }
 
         [TestMethod]
         public void RegistedServices_ReceiveResumingEvent()
         {
-            MockService service1 = new MockService();
-            MockService service2 = new MockService();
+            var service1 = Substitute.For<ILifetimeAware>();
+            service1.OnResuming().Returns(Task.FromResult(true));
+            var service2 = Substitute.For<ILifetimeAware>();
+            service2.OnResuming().Returns(Task.FromResult(true));
 
             TestableLifetimeManager lifetimeManager = CreateLifetimeManager(new[] { service1, service2 });
 
             lifetimeManager.Resume();
 
-            CollectionAssert.AreEqual(new string[] { "OnResuming" }, service1.LifetimeEventCalls);
-            CollectionAssert.AreEqual(new string[] { "OnResuming" }, service2.LifetimeEventCalls);
+            service1.Received().OnResuming();
+            service2.Received().OnResuming();
         }
 
         [TestMethod]
         public void RegistedServices_ReceiveExitingEvent()
         {
-            MockService service1 = new MockService();
-            MockService service2 = new MockService();
+            var service1 = Substitute.For<ILifetimeAware>();
+            service1.OnExiting().Returns(Task.FromResult(true));
+            var service2 = Substitute.For<ILifetimeAware>();
+            service2.OnExiting().Returns(Task.FromResult(true));
 
             TestableLifetimeManager lifetimeManager = CreateLifetimeManager(new[] { service1, service2 });
 
             lifetimeManager.Exit();
 
-            CollectionAssert.AreEqual(new string[] { "OnExiting" }, service1.LifetimeEventCalls);
-            CollectionAssert.AreEqual(new string[] { "OnExiting" }, service2.LifetimeEventCalls);
+            service1.Received().OnExiting();
+            service2.Received().OnExiting();
         }
 
         [TestMethod]
         public void RegistedServices_ReceiveMultipleEvents()
         {
-            MockService service1 = new MockService();
-            MockService service2 = new MockService();
+            var service1 = Substitute.For<ILifetimeAware>();
+            service1.OnExiting().Returns(Task.FromResult(true));
+            service1.OnResuming().Returns(Task.FromResult(true));
+            service1.OnSuspending().Returns(Task.FromResult(true));
 
-            TestableLifetimeManager lifetimeManager = CreateLifetimeManager(new[] { service1, service2 });
+            TestableLifetimeManager lifetimeManager = CreateLifetimeManager(new[] { service1 });
 
             lifetimeManager.Suspend(new MockSuspendingEventArgs());
             lifetimeManager.Resume();
             lifetimeManager.Exit();
 
-            CollectionAssert.AreEqual(new string[] { "OnSuspending", "OnResuming", "OnExiting" }, service1.LifetimeEventCalls);
-            CollectionAssert.AreEqual(new string[] { "OnSuspending", "OnResuming", "OnExiting" }, service2.LifetimeEventCalls);
+            service1.Received().OnSuspending();
+            service1.Received().OnResuming();
+            service1.Received().OnExiting();
         }
 
         [TestMethod]
         public async Task RegistedServices_CausesDeferralOfSuspension()
         {
-            // Create two services which will complete suspension when their tasks complete
+            var tcs1 = new TaskCompletionSource<bool>();
+            var service1 = Substitute.For<ILifetimeAware>();
+            service1.OnSuspending().Returns(tcs1.Task);
 
-            TaskCompletionSource<bool> tcs1 = new TaskCompletionSource<bool>();
-            TaskCompletionSource<bool> tcs2 = new TaskCompletionSource<bool>();
-
-            MockService service1 = new MockService(tcs1.Task);
-            MockService service2 = new MockService(tcs2.Task);
-
-            // Create the LifetimeManager
+            var tcs2 = new TaskCompletionSource<bool>();
+            var service2 = Substitute.For<ILifetimeAware>();
+            service2.OnSuspending().Returns(tcs2.Task);
 
             TestableLifetimeManager lifetimeManager = CreateLifetimeManager(new[] { service1, service2 });
-
-            // Suspend the LifetimeManager
 
             MockSuspendingEventArgs suspendingEventArgs = new MockSuspendingEventArgs();
             lifetimeManager.Suspend(suspendingEventArgs);
 
-            // Check that the suspension is deferred
-
             Assert.IsTrue(suspendingEventArgs.IsDeferred);
-
-            // Check that the suspension is deferred on completion of first service
 
             tcs1.SetResult(true);
             await Task.Yield();
             Assert.IsTrue(suspendingEventArgs.IsDeferred);
 
-            // Check that the suspension is completed on completion of second service
-
             tcs2.SetResult(true);
             await Task.Yield();
             Assert.IsFalse(suspendingEventArgs.IsDeferred);
         }
-
-        // *** Private Methods ***
 
         private TestableLifetimeManager CreateLifetimeManager(ILifetimeAware[] services)
         {
@@ -163,12 +156,8 @@ namespace Cocoon.Tests.Services
             return lifetimeManager;
         }
 
-        // *** Private Sub-classes ***
-
         private class TestableLifetimeManager : LifetimeManager
         {
-            // *** Methods ***
-
             public void Suspend(ISuspendingEventArgs e)
             {
                 base.OnSuspending(null, e);
@@ -184,113 +173,32 @@ namespace Cocoon.Tests.Services
                 base.OnExiting(null, null);
             }
 
-            // *** Overriden base methods ***
-
             protected override ISuspendingDeferral GetDeferral(ISuspendingEventArgs e)
             {
                 return ((MockSuspendingEventArgs)e).GetDeferral();
             }
         }
 
-        private class MockService : ILifetimeAware
-        {
-            // *** Fields ***
-
-            private Task suspensionCompleteTask;
-
-            // *** Constructors ***
-
-            public MockService(Task suspensionCompleteTask)
-            {
-                this.suspensionCompleteTask = suspensionCompleteTask;
-                this.LifetimeEventCalls = new List<string>();
-            }
-
-            public MockService()
-                : this(Task.FromResult<bool>(true))
-            {
-            }
-
-            // *** Properties ***
-
-            public IList LifetimeEventCalls { get; private set; }
-
-            // *** Methods ***
-
-            public Task OnExiting()
-            {
-                LifetimeEventCalls.Add("OnExiting");
-                return Task.FromResult(true);
-            }
-
-            public Task OnResuming()
-            {
-                LifetimeEventCalls.Add("OnResuming");
-                return Task.FromResult(true);
-            }
-
-            public Task OnSuspending()
-            {
-                LifetimeEventCalls.Add("OnSuspending");
-                return suspensionCompleteTask;
-            }
-        }
-
+        [Obsolete]
         public class MockSuspendingEventArgs : ISuspendingEventArgs
         {
-            // *** Fields ***
-
-            public IList<MockSuspendingDeferral> Deferrals = new List<MockSuspendingDeferral>();
-
-            // *** Mock Properties ***
-
-            public int DeferralCount
-            {
-                get
-                {
-                    return Deferrals.Where(d => !d.IsComplete).Count();
-                }
-            }
+            public IList<ISuspendingDeferral> Deferrals = new List<ISuspendingDeferral>();
 
             public bool IsDeferred
             {
-                get
-                {
-                    return DeferralCount > 0;
-                }
+                get { return Deferrals.Any(d => !d.ReceivedCalls().Any()); }
             }
-
-            // *** ISuspendingEventArgs Properties ***
 
             public SuspendingOperation SuspendingOperation
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
-
-            // *** Testing Helper Methods ***
 
             public ISuspendingDeferral GetDeferral()
             {
-                MockSuspendingDeferral deferral = new MockSuspendingDeferral();
+                var deferral = Substitute.For<ISuspendingDeferral>();
                 Deferrals.Add(deferral);
                 return deferral;
-            }
-        }
-
-        public class MockSuspendingDeferral : ISuspendingDeferral
-        {
-            // *** Fields ***
-
-            public bool IsComplete;
-
-            // *** Methods ***
-
-            public void Complete()
-            {
-                IsComplete = true;
             }
         }
     }
