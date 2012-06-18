@@ -32,41 +32,4 @@ namespace Cocoon.Tests
             mock.Received(1).GetAValue();
         }
     }
-
-    
-    public class SomeTougherTests
-    {
-        INavigationManager navigationManager = Substitute.For<INavigationManager>();
-        ActivationManager activationManager;
-
-        public SomeTougherTests()
-        {
-            activationManager = new ActivationManager(navigationManager);
-        }
-
-        // this same test fails in ActivationManagerFixture.cs - how curious
-
-        [TestMethod]
-        public async Task Activate_Launch_NavigatesToHomePageIfNoPreviousNavigationStack()
-        {
-            navigationManager.RestoreNavigationStack().Returns(Task.FromResult(false));
-
-            var args = Substitute.For<ILaunchActivatedEventArgs>();
-            await activationManager.Activate(args);
-
-            navigationManager.Received().NavigateTo("MockHomePage");
-        }
-
-
-        [TestMethod]
-        public async Task Activate_ReturnsFalse_IfActivationTypeIsNotSupported()
-        {
-            var args = Substitute.For<IActivatedEventArgs>();
-            args.Kind.Returns(ActivationKind.CameraSettings);
-
-            var success = await activationManager.Activate(args);
-
-            Assert.IsFalse(success);
-        }
-    }
 }
