@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
 using Cocoon.Services;
 using Cocoon.Tests.Helpers;
@@ -15,8 +12,6 @@ namespace Cocoon.Tests.Services
     [TestClass]
     public class StorageManagerFixture
     {
-        // *** Method Tests ***
-
         [TestMethod]
         public async Task StoreAsync_WithStorageFile_ThrowsException_IfFileIsNull()
         {
@@ -113,12 +108,8 @@ namespace Cocoon.Tests.Services
             StorageFolder folder = ApplicationData.Current.TemporaryFolder;
             StorageFile file = await folder.CreateFileAsync(GetTestFilename(), CreationCollisionOption.ReplaceExisting);
 
-            // Store some test data
-
             TestData data = new TestData() { Text = "Test Text", Number = 42 };
             await storageManager.StoreAsync(file, data);
-
-            // Retrieve and validate the data from the file
 
             TestData retrievedData = await storageManager.RetrieveAsync<TestData>(file);
 
@@ -126,170 +117,10 @@ namespace Cocoon.Tests.Services
             Assert.AreEqual(42, retrievedData.Number);
         }
 
-        //[TestMethod]
-        //public async Task StoreAsyncRetrieveAsync_WithStorageFolder_PersistsFileViaStorage()
-        //{
-        //    StorageManager storageManager = new StorageManager();
-        //    StorageFolder folder = ApplicationData.Current.TemporaryFolder;
-        //    string name = GetTestFilename();
-
-        //    // Store some test data
-
-        //    TestData data = new TestData() { Text = "Test Text", Number = 42 };
-        //    await storageManager.StoreAsync(folder, name, data);
-
-        //    // Retrieve and validate the data from the file
-
-        //    TestData retrievedData = await storageManager.RetrieveAsync<TestData>(folder, name);
-
-        //    Assert.AreEqual("Test Text", retrievedData.Text);
-        //    Assert.AreEqual(42, retrievedData.Number);
-        //}
-
-        //[TestMethod]
-        //public async Task StoreAsyncRetrieveAsync_WithStorageFile_PersistsNull()
-        //{
-        //    StorageManager storageManager = new StorageManager();
-        //    StorageFolder folder = ApplicationData.Current.TemporaryFolder;
-        //    StorageFile file = await folder.CreateFileAsync(GetTestFilename(), CreationCollisionOption.ReplaceExisting);
-
-        //    // Store some test data
-
-        //    TestData data = null;
-        //    await storageManager.StoreAsync(file, data);
-
-        //    // Retrieve and validate the data from the file
-
-        //    TestData retrievedData = await storageManager.RetrieveAsync<TestData>(file);
-
-        //    Assert.IsNull(retrievedData);
-        //}
-
-        //[TestMethod]
-        //public async Task StoreAsyncRetrieveAsync_WithStorageFolder_PersistsNull()
-        //{
-        //    StorageManager storageManager = new StorageManager();
-        //    StorageFolder folder = ApplicationData.Current.TemporaryFolder;
-        //    string name = GetTestFilename();
-
-        //    // Store some test data
-
-        //    TestData data = null;
-        //    await storageManager.StoreAsync(folder, name, data);
-
-        //    // Retrieve and validate the data from the file
-
-        //    TestData retrievedData = await storageManager.RetrieveAsync<TestData>(folder, name);
-
-        //    Assert.IsNull(retrievedData);
-        //}
-
-        //[TestMethod]
-        //public async Task StoreAsyncRetrieveAsync_WithStorageFile_PersistsNullOverData()
-        //{
-        //    StorageManager storageManager = new StorageManager();
-        //    StorageFolder folder = ApplicationData.Current.TemporaryFolder;
-        //    StorageFile file = await folder.CreateFileAsync(GetTestFilename(), CreationCollisionOption.ReplaceExisting);
-
-        //    // Store some test data
-
-        //    TestData oldData = new TestData() { Text = "Test Text", Number = 42 };
-        //    await storageManager.StoreAsync(file, oldData);
-
-        //    // Overwrite test data
-
-        //    TestData data = null;
-        //    await storageManager.StoreAsync(file, data);
-
-        //    // Retrieve and validate the data from the file
-
-        //    TestData retrievedData = await storageManager.RetrieveAsync<TestData>(file);
-
-        //    Assert.IsNull(retrievedData);
-        //}
-
-        //[TestMethod]
-        //public async Task StoreAsyncRetrieveAsync_WithStorageFolder_PersistsNullOverData()
-        //{
-        //    StorageManager storageManager = new StorageManager();
-        //    StorageFolder folder = ApplicationData.Current.TemporaryFolder;
-        //    string name = GetTestFilename();
-
-        //    // Store some test data
-
-        //    TestData oldData = new TestData() { Text = "Test Text", Number = 42 };
-        //    await storageManager.StoreAsync(folder, name, oldData);
-
-        //    // Overwrite test data
-
-        //    TestData data = null;
-        //    await storageManager.StoreAsync(folder, name, data);
-
-        //    // Retrieve and validate the data from the file
-
-        //    TestData retrievedData = await storageManager.RetrieveAsync<TestData>(folder, name);
-
-        //    Assert.IsNull(retrievedData);
-        //}
-
-        //[TestMethod]
-        //public async Task StoreAsyncRetrieveAsync_WithStorageFile_PersistsDataOverNull()
-        //{
-        //    StorageManager storageManager = new StorageManager();
-        //    StorageFolder folder = ApplicationData.Current.TemporaryFolder;
-        //    StorageFile file = await folder.CreateFileAsync(GetTestFilename(), CreationCollisionOption.ReplaceExisting);
-
-        //    // Store some test data
-
-        //    TestData oldData = null;
-        //    await storageManager.StoreAsync(file, oldData);
-
-        //    // Overwrite test data
-
-        //    TestData data = new TestData() { Text = "Test Text", Number = 42 };
-        //    await storageManager.StoreAsync(file, data);
-
-        //    // Retrieve and validate the data from the file
-
-        //    TestData retrievedData = await storageManager.RetrieveAsync<TestData>(file);
-
-        //    Assert.AreEqual("Test Text", retrievedData.Text);
-        //    Assert.AreEqual(42, retrievedData.Number);
-        //}
-
-        //[TestMethod]
-        //public async Task StoreAsyncRetrieveAsync_WithStorageFolder_PersistsDataOverNull()
-        //{
-        //    StorageManager storageManager = new StorageManager();
-        //    StorageFolder folder = ApplicationData.Current.TemporaryFolder;
-        //    string name = GetTestFilename();
-
-        //    // Store some test data
-
-        //    TestData oldData = null;
-        //    await storageManager.StoreAsync(folder, name, oldData);
-
-        //    // Overwrite test data
-
-        //    TestData data = new TestData() { Text = "Test Text", Number = 42 };
-        //    await storageManager.StoreAsync(folder, name, data);
-
-        //    // Retrieve and validate the data from the file
-
-        //    TestData retrievedData = await storageManager.RetrieveAsync<TestData>(folder, name);
-
-        //    Assert.AreEqual("Test Text", retrievedData.Text);
-        //    Assert.AreEqual(42, retrievedData.Number);
-        //}
-
-        // *** Private Methods ***
-
         private string GetTestFilename([CallerMemberName]string callerName = null)
         {
             return callerName;
         }
-
-        // *** Private Sub-classes ***
 
         [DataContract]
         private class TestData

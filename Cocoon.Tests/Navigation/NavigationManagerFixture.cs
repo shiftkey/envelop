@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Text;
-using System.Linq;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using Cocoon.Navigation;
-using Windows.UI.Xaml;
-using Cocoon.Services;
-using Windows.ApplicationModel;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.ApplicationModel.Activation;
-using Cocoon.Tests.Helpers;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
+using Cocoon.Navigation;
+using Cocoon.Services;
+using Cocoon.Tests.Helpers;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using NSubstitute;
+using Windows.Storage;
 using Windows.UI.Xaml.Navigation;
 
 namespace Cocoon.Tests.Navigation
@@ -19,12 +16,11 @@ namespace Cocoon.Tests.Navigation
     [TestClass]
     public class NavigationManagerFixture
     {
-        // *** Property Tests ***
-
+        
         [TestMethod]
         public void CanGoBack_IsFalseIfNoPagesNavigated()
         {
-            MockNavigationTarget navigationTarget = new MockNavigationTarget();
+            var navigationTarget = Substitute.For<INavigationTarget>();
             INavigationManager navigationManager = CreateNavigationManager(navigationTarget);
 
             Assert.AreEqual(false, navigationManager.CanGoBack);
@@ -33,8 +29,11 @@ namespace Cocoon.Tests.Navigation
         [TestMethod]
         public void CanGoBack_IsFalseIfOnePageNavigated()
         {
-            MockNavigationTarget navigationTarget = new MockNavigationTarget();
-            INavigationManager navigationManager = CreateNavigationManager(navigationTarget);
+            var navigationTarget = Substitute.For<INavigationTarget>();
+            var viewFactory = Substitute.For<IViewFactory>();
+            viewFactory.CreateView(Arg.Any<string>()).Returns(Substitute.For<IViewLifetimeContext>());
+
+            var navigationManager = CreateNavigationManager(navigationTarget, viewFactory: viewFactory);
 
             navigationManager.NavigateTo("Page 1");
 
@@ -44,7 +43,7 @@ namespace Cocoon.Tests.Navigation
         [TestMethod]
         public void CanGoBack_IsFalseIfTwoPagesNavigatedThenBack()
         {
-            MockNavigationTarget navigationTarget = new MockNavigationTarget();
+            var navigationTarget = Substitute.For<INavigationTarget>();
             INavigationManager navigationManager = CreateNavigationManager(navigationTarget);
 
             navigationManager.NavigateTo("Page 1");
@@ -57,7 +56,7 @@ namespace Cocoon.Tests.Navigation
         [TestMethod]
         public void CanGoBack_IsTrueIfTwoPagesNavigated()
         {
-            MockNavigationTarget navigationTarget = new MockNavigationTarget();
+            var navigationTarget = Substitute.For<INavigationTarget>();
             INavigationManager navigationManager = CreateNavigationManager(navigationTarget);
 
             navigationManager.NavigateTo("Page 1");
@@ -1125,7 +1124,7 @@ namespace Cocoon.Tests.Navigation
         private NavigationManager CreateNavigationManager(INavigationTarget navigationTarget = null, IViewFactory viewFactory = null, ILifetimeManager lifetimeManager = null, IStorageManager storageManager = null, bool navigationTargetIsNull = false, bool setHomePageName = true)
         {
             if (navigationTarget == null && !navigationTargetIsNull)
-                navigationTarget = new MockNavigationTarget();
+                navigationTarget = Substitute.For<INavigationTarget>();
 
             if (viewFactory == null)
                 viewFactory = new MockViewFactory();
@@ -1136,7 +1135,7 @@ namespace Cocoon.Tests.Navigation
             if (storageManager == null)
                 storageManager = new MockStorageManager();
 
-            NavigationManager navigationManager = new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager);
+            var navigationManager = new NavigationManager(navigationTarget, viewFactory, lifetimeManager, storageManager);
 
             if (setHomePageName)
                 navigationManager.HomePageName = "Page 1";
@@ -1146,6 +1145,7 @@ namespace Cocoon.Tests.Navigation
 
         // *** Private Sub-classes ***
 
+        [Obsolete]
         private class MockViewFactory : IViewFactory
         {
             // *** Methods ***
@@ -1166,6 +1166,7 @@ namespace Cocoon.Tests.Navigation
             }
         }
 
+        [Obsolete]
         private class MockViewFactory_WithComplexArguments : IViewFactory
         {
             // *** Methods ***
@@ -1186,6 +1187,7 @@ namespace Cocoon.Tests.Navigation
             }
         }
 
+        [Obsolete]
         private class MockViewFactory_WithComplexState : IViewFactory
         {
             // *** Methods ***
@@ -1206,6 +1208,7 @@ namespace Cocoon.Tests.Navigation
             }
         }
 
+        [Obsolete]
         private class MockViewFactory_WithNonNullableState : IViewFactory
         {
             // *** Methods ***
@@ -1226,6 +1229,7 @@ namespace Cocoon.Tests.Navigation
             }
         }
 
+        [Obsolete]
         private class MockViewFactory_WithNavigationAware : IViewFactory
         {
             // *** Methods ***
@@ -1246,6 +1250,7 @@ namespace Cocoon.Tests.Navigation
             }
         }
 
+        [Obsolete]
         private class MockViewLifetimeContext<TArguments, TState> : IViewLifetimeContext
         {
             // *** Constructors ***
@@ -1286,13 +1291,10 @@ namespace Cocoon.Tests.Navigation
             }
         }
 
+        [Obsolete]
         private class MockNavigationTarget : INavigationTarget
         {
-            // *** Fields ***
-
             public List<object> NavigatedPages = new List<object>();
-
-            // *** Methods ***
 
             public void NavigateTo(object page)
             {
@@ -1300,6 +1302,7 @@ namespace Cocoon.Tests.Navigation
             }
         }
 
+        [Obsolete]
         private class MockLifetimeManager : ILifetimeManager
         {
             // *** Fields ***
@@ -1339,13 +1342,10 @@ namespace Cocoon.Tests.Navigation
             }
         }
 
+        [Obsolete]
         private class MockStorageManager : IStorageManager
         {
-            // *** Fields ***
-
             private Dictionary<string, byte[]> storageDictionary = new Dictionary<string, byte[]>();
-
-            // *** IStorageManager Methods ***
 
             public async Task<T> RetrieveAsync<T>(StorageFile file)
             {
@@ -1391,6 +1391,7 @@ namespace Cocoon.Tests.Navigation
             public object DataContext { get; set; }
         }
 
+        [Obsolete]
         private class MockViewModel<TArguments, TState> : IActivatable<TArguments, TState>
         {
             // *** Properties ***
@@ -1417,6 +1418,7 @@ namespace Cocoon.Tests.Navigation
             }
         }
 
+        [Obsolete]
         private class MockNavigationAwareViewModel<TArguments, TState> : MockViewModel<TArguments, TState>, INavigationAware
         {
             // *** Fields ***
